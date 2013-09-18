@@ -1,0 +1,85 @@
+*qfmanip.txt*	For Vim version 7.3	Last change: 2013 Sep 18
+
+Plugin author: Benoit Mortgat
+                                                         *qfmanip*
+The qfmanip plug-in assists you in filtering and ordering your quickfix list
+or your location list.
+
+It consists of several mappings that you can customize. The default prefix for
+these mappings is _q for quickfix list, and _l for location list.
+See |qfmanip-mappings-customization|.
+
+location list commands always work on the location list for the current
+window.
+
+===============================================================================
+Filtering~
+                                                         *qfmanip-filter*
+
+Filtering the list is useful after a search that had too many results for
+example using |:vimgrep| or |:lvimgrep|.
+
+Four commands are provided for filtering. All commands prompt for a pattern.
+If given empty pattern, the current search pattern is used.
+
+The syntax for patterns is the same as search patterns. See |pattern| for
+syntax.
+
+ _qF : discards from the quickfix list all entries for which the buffer name
+       matches the given pattern
+
+ _qf : only retains in the quickfix list the entries for which the buffer name
+       matches the given pattern
+
+ _qP : discards from the quickfix list all entries for which the text
+       matches the given pattern
+
+ _qp : only retains in the quickfix list the entries for which the text
+       matches the given pattern
+
+With prefix _l : same with location list
+
+===============================================================================
+Sorting~
+                                                         *qfmanip-sort*
+
+_qs will sort the quickfix list (by buffer name, then by line number).
+
+Sort is done in place: you cannot restore the previous quickfix list with
+commands like |:colder|.
+
+With prefix _l : same with location list
+
+===============================================================================
+Eliminating duplicates~
+                                                         *qfmanip-duplicates*
+
+_qu will eliminate the adjacent duplicates from the quickfix list. Moreover,
+_qU performs the sort beforehand.
+
+Elimination of duplicates is done in place: you cannot restore the previous
+quickfix list with commands like |:colder|.
+
+With prefix _l : same with location list
+
+===============================================================================
+Customization of mappings~
+                                            *qfmanip-mappings-customization*
+
+You can customize the mapping parts by setting the following variables in your
+vimrc.
+
+PART OF MAPPING                    DFLT  CORRESPONDING GLOBAL VARIABLE
+Prefix for quickfix list            _q   g:qfmanip_hotkey_ql_prefix
+Prefix for location list            _l   g:qfmanip_hotkey_ll_prefix
+Filtering buffer names (exclude)    F    g:qfmanip_hotkey_excl_filename
+Filtering buffer names (retain)     f    g:qfmanip_hotkey_incl_filename
+Filtering text patterns (exclude)   P    g:qfmanip_hotkey_excl_pattern
+Filtering text patterns (retain)    p    g:qfmanip_hotkey_incl_pattern
+Sorting                             s    g:qfmanip_hotkey_sort
+Eliminating duplicates              u    g:qfmanip_hotkey_uniq
+Sorting and eliminating duplicates  U    g:qfmanip_hotkey_sort_and_uniq
+
+===============================================================================
+
+vim: readonly noexpandtab ft=help
