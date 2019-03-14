@@ -48,7 +48,7 @@ function qfmanip#filter(type, qfitempattern, action, pattern)
       endif
     endif
   endfor
-  call <SID>SetList(a:type, s:new_list, '')
+  call <SID>SetList(a:type, s:new_list, ' ')
 endfunction
 
 function qfmanip#sort(type)
@@ -60,9 +60,11 @@ function qfmanip#uniq(type)
   let uniqedList = []
   let lastitem = ''
   for item in origList
-    let thisitem = bufname(item.bufnr) . "\t" . item.lnum
+    let thisitem = simplify(fnamemodify(bufname(item.bufnr),':p')) . "\t" . item.lnum
     if thisitem !=# lastitem
-      call add(uniqedList, item)
+      let newitem = deepcopy(item)
+      let newitem.filename = thisitem
+      call add(uniqedList, newitem)
       let lastitem = thisitem
     endif
   endfor
